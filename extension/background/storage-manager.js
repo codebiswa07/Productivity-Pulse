@@ -9,7 +9,7 @@ export class StorageManager {
           trackingEnabled: true,
           blockingEnabled: true,
           syncEnabled: true,
-          apiBase: 'http://localhost:5000/api',
+          apiBase: 'https://productivity-pulse-server.onrender.com/api',
           authToken: null,
           productiveCategories: ['work', 'education', 'development'],
           dailyGoalMinutes: 480,
