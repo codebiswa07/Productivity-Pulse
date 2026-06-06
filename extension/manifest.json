@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "ProductivityPulse",
+  "version": "1.0.0",
+  "description": "Track your browsing time, block distractions, and boost productivity.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "idle",
+    "alarms",
+    "webNavigation",
+    "declarativeNetRequest",
+    "notifications"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-scripts/content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options/index.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked-page/blocked.html",
+        "blocked-page/blocked.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Blocked — ProductivityPulse</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f0f4ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e293b;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 440px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(59,130,246,0.12);
+      border: 1px solid #e2e8f0;
+    }
+    .icon { font-size: 64px; margin-bottom: 16px; }
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #0f172a; }
+    .domain {
+      display: inline-block;
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 4px 14px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    p { color: #64748b; line-height: 1.6; margin-bottom: 28px; font-size: 15px; }
+    .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    button {
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all .2s;
+    }
+    .btn-back { background: #3b82f6; color: #fff; }
+    .btn-back:hover { background: #2563eb; }
+    .btn-allow { background: #f1f5f9; color: #475569; }
+    .btn-allow:hover { background: #e2e8f0; }
+    .timer { margin-top: 24px; font-size: 13px; color: #94a3b8; }
+    small { color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">🚫</div>
+    <h1>Focus Mode Active</h1>
+    <div class="domain" id="domain">example.com</div>
+    <p id="message">
+      You've blocked this site to stay productive.<br>
+      Keep going — you're doing great!
+    </p>
+
+    <div class="actions">
+      <button class="btn-back" id="backBtn">← Go Back</button>
+      <button class="btn-allow" id="allowBtn">Allow for 5 min</button>
+    </div>
+
+    <div class="timer" id="timer"></div>
+  </div>
+
+  <script src="blocked.js"></script>
+</body>
+</html>
