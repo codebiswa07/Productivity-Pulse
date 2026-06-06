@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 export default function Register() {
   const { signUp, loading } = useAuth();
   const navigate = useNavigate();
-  const [form,  setForm]  = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
@@ -16,6 +16,14 @@ export default function Register() {
     const res = await signUp(form.name, form.email, form.password);
     if (res.success) navigate('/');
     else setError(res.error);
+    const response = await register(formData);
+  
+    localStorage.setItem("pp_token", response.token);
+  
+    prompt(
+      "Copy your JWT Token:",
+      response.token
+    );
   };
 
   return (
@@ -35,9 +43,9 @@ export default function Register() {
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
             {[
-              { key: 'name',     label: 'Full Name', type: 'text',     icon: User,  placeholder: 'Jane Smith'         },
-              { key: 'email',    label: 'Email',     type: 'email',    icon: Mail,  placeholder: 'you@example.com'    },
-              { key: 'password', label: 'Password',  type: 'password', icon: Lock,  placeholder: 'At least 6 chars'  },
+              { key: 'name', label: 'Full Name', type: 'text', icon: User, placeholder: 'Jane Smith' },
+              { key: 'email', label: 'Email', type: 'email', icon: Mail, placeholder: 'you@example.com' },
+              { key: 'password', label: 'Password', type: 'password', icon: Lock, placeholder: 'At least 6 chars' },
             ].map(({ key, label, type, icon: Icon, placeholder }) => (
               <div key={key}>
                 <label className="block text-xs font-semibold text-slate-600 mb-1.5">{label}</label>

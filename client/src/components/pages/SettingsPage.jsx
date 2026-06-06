@@ -6,9 +6,12 @@ import * as api from '../../api';
 export default function SettingsPage() {
   const { user, signOut } = useAuth();
   const [settings, setSettings] = useState(null);
-  const [loading, setLoading]   = useState(true);
-  const [saving,  setSaving]    = useState(false);
-  const [saved,   setSaved]     = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [form, setForm] = useState({
+    authToken: localStorage.getItem('pp_token') || '',
+  });
 
   useEffect(() => {
     api.getSettings().then((r) => { setSettings(r.data.settings); setLoading(false); });
@@ -23,7 +26,16 @@ export default function SettingsPage() {
       setSaved(true); setTimeout(() => setSaved(false), 2000);
     } finally { setSaving(false); }
   };
+  useEffect(() => {
+    const token = localStorage.getItem("pp_token");
 
+    if (token) {
+      setForm((prev) => ({
+        ...prev,
+        authToken: token,
+      }));
+    }
+  }, []);
   if (loading) return (
     <div className="flex items-center justify-center h-64">
       <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
@@ -96,13 +108,32 @@ export default function SettingsPage() {
           </div>
         </div>
       )}
+      <div className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm space-y-3">
+        <p className="text-sm font-semibold text-slate-700">
+          JWT Token
+        </p>
 
+        <textarea
+          readOnly
+          value={form.authToken || ''}
+          className="w-full h-24 text-xs bg-slate-50 border border-slate-200 rounded-xl p-3 font-mono"
+        />
+
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(form.authToken || '');
+            alert('Token copied!');
+          }}
+          className="px-4 py-2 bg-blue-500 text-white rounded-xl text-sm"
+        >
+          Copy Token
+        </button>
+      </div>
       {/* Save */}
       <button
         onClick={save} disabled={saving}
-        className={`flex items-center justify-center gap-2 w-full py-3 rounded-2xl text-sm font-semibold transition-all ${
-          saved ? 'bg-green-500 text-white' : 'btn-primary'
-        }`}
+        className={`flex items-center justify-center gap-2 w-full py-3 rounded-2xl text-sm font-semibold transition-all ${saved ? 'bg-green-500 text-white' : 'btn-primary'
+          }`}
       >
         {saved ? <><CheckCircle size={15} /> Saved!</> : saving ? 'Saving…' : <><Save size={15} /> Save Changes</>}
       </button>

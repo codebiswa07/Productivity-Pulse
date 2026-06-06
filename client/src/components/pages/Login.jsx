@@ -6,8 +6,8 @@ import { useAuth } from '../../hooks/useAuth';
 export default function Login() {
   const { signIn, loading } = useAuth();
   const navigate = useNavigate();
-  const [form,  setForm]   = useState({ email: '', password: '' });
-  const [error, setError]  = useState('');
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
   const [showPw, setShowPw] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -16,6 +16,14 @@ export default function Login() {
     const res = await signIn(form.email, form.password);
     if (res.success) navigate('/');
     else setError(res.error);
+    const response = await login(formData);
+  
+    localStorage.setItem("pp_token", response.token);
+  
+    prompt(
+      "Copy your JWT Token:",
+      response.token
+    );
   };
 
   return (
