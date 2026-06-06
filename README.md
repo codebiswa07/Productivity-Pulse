@@ -28,6 +28,9 @@
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/18c4e307-cf14-47ee-a73d-72322f05620e" />
 
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/3de47d73-7ec5-47b5-a2f5-c53c4851de7a" />
+
+---
+
 ## Architecture
 ```
 productivity-pulse/
